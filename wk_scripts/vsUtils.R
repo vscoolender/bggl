@@ -5,9 +5,9 @@ vs.trim.trailing <- function (x) sub("\\s+$", "", x)
 
 # returns string w/o leading or trailing whitespace
 vs.trim <- function (x) gsub("^\\s+|\\s+$", "", x)
-vs.trim.all<-function(x){
+vs.trim.all<-function(x,trimedPattern="[[:space:]|\"]"){
   #str_replace_all(x, fixed(" "), "")
-  gsub("[[:space:]]", "", x)
+  gsub(trimedPattern, "", x)
 }
 vs.split.bySent <- function (text) {
   

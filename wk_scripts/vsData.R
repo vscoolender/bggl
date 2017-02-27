@@ -1,9 +1,9 @@
 #preprocess each document as the following steps:
-vs.nlp.preprocDs<-function(itemDs,targetFile,sentHandler,rawTargetFile=NULL,preMarkedTag=NULL){
+vs.nlp.preprocDs<-function(itemDs,contentIdx,targetFile,sentHandler,rawTargetFile=NULL,preMarkedTag=NULL){
   
-  item<-as.character(itemDs[1])
+  item<-as.character(itemDs[contentIdx])
   if(vs.trim(item)==''){
-    continue
+    return
   }
   
   #split sentences.
@@ -32,8 +32,9 @@ vs.nlp.preprocDs<-function(itemDs,targetFile,sentHandler,rawTargetFile=NULL,preM
 
 vs.nlp.preNer.sentHandler<-function(sentence,targetFile,preMarkedTag=NULL){
   it<-vs.trim.all(sentence)
+  
   if(it=='') {
-    continue
+    return
   }
    tags<-gv_tagger<=it
    for (i in seq_along(tags)){
@@ -59,13 +60,15 @@ vs.nlp.preNer.sentHandler<-function(sentence,targetFile,preMarkedTag=NULL){
 
 #check elements' number of every row in the crf++ template file.
 vs.data.crf.check<-function(crfFile,standNum){
+  rslt<-list()
   crfDs<-readLines(crfFile)
   for(i in 1:length(crfDs)){
     item<-crfDs[i]
     count<-str_count(item," ");
-    if (count!=standNum){
-      print(str_c("Line No:",i,":",item))
-      
+    if (item!=''&& count!=standNum){
+      print(str_c("Line No:",i,"[count:",count,"]:",item))
+      append(rslt,item)
     }
   }
+  return (rslt)
 }

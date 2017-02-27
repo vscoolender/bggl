@@ -10,7 +10,8 @@ gv_tagger$symbol=T
 dupIdx.bggl<-duplicated(bgglDs$变更描述)
 rd.bggl<-bgglDs[!dupIdx.bggl,]
 s_bgglDs<-head(rd.bggl,100)
-s_bgglDs<-bgglDs
+s_bgglDs<-rd.bggl
+#show_dictpath()
 
 
 #clear target file
@@ -18,8 +19,8 @@ s_bgglDs<-bgglDs
 cat('',file=targetFile,append=F)
 cat('',file=rawTargetFile,append=F)
 preMarkedTag<-"O"
-apply(s_bgglDs,1,vs.nlp.preprocDs,targetFile,vs.nlp.preNer.sentHandler,rawTargetFile,preMarkedTag)
+apply(s_bgglDs,1,vs.nlp.preprocDs,1,targetFile,vs.nlp.preNer.sentHandler,rawTargetFile,preMarkedTag)
 
-crfFile<-"../r_workdir/bgNer.train"
-crfDs<-vs.data.crf.check(crfFile,2)
+crfFile<-"../r_workdir/bgNer2.train"
+crfDs<-vs.data.crf.check(crfFile,4)
 
