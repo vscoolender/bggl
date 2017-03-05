@@ -65,6 +65,7 @@ vs.data.crf.check<-function(crfFile,standNum){
   for(i in 1:length(crfDs)){
     item<-crfDs[i]
     count<-str_count(item," ");
+    
     if (item!=''&& count!=standNum){
       print(str_c("Line No:",i,"[count:",count,"]:",item))
       append(rslt,item)

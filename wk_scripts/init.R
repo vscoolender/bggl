@@ -1,7 +1,10 @@
+options(java.parameters = "-Xmx1500m")
 library("jiebaR")
 library(stringr)
 library("data.table")
 library("fpc")
 library("coreNLP")
+#coreNLP::downloadCoreNLP()
+#initCoreNLP()
 setwd("D:/work/projs/dmprojs/zcgl/r_workdir")
  
